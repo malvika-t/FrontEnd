@@ -1,31 +1,28 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { componentFactoryName } from '@angular/compiler';
+import {HomePageComponent} from './home-page/home-page.component';
+import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { LogInsuccessComponent } from './log-insuccess/log-insuccess.component';
-import { ShowtransactionsComponent } from './showtransactions/showtransactions.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { UploadComponent } from './upload/upload.component';
-import {CoremModule} from './corem/corem.module';
-import { from } from 'rxjs';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { AuthGuard } from './auth.guard';
-import { LogoutComponent } from './logout/logout.component';
-const routes: Routes = [
-  
+import { FormUploadComponent } from './upload/form-upload/form-upload.component';
+import {UploadFileComponent} from './upload-file/upload-file.component';
 
-  {path:'Upload',canActivate:[AuthGuard],component:UploadComponent  },
-  {path:'',canActivate:[AuthGuard], component:LogInsuccessComponent},
-  {path:'showtransactions',canActivate:[AuthGuard],component:ShowtransactionsComponent},
-  {path:'registration', component:RegistrationComponent},
-  {path:'login',component:LoginComponent},
-  {path:'upload',canActivate:[AuthGuard],component:UploadComponent},
-  {path:'home',canActivate:[AuthGuard],component:HomeComponent},
-  { path: 'logout',canActivate:[AuthGuard], component: LogoutComponent },
+const routes: Routes = [
+  {path : 'login/homepage', component:HomePageComponent},
+  {path : 'login' , component:LoginComponent},
+  {path : 'fileupload' , component:UploadFileComponent},
+  {path : '' , component:LoginComponent},
+  {path : '**' , component : HomePageComponent}
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [RouterModule],
+  declarations: []
 })
 export class AppRoutingModule { }

@@ -1,66 +1,67 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatFormFieldModule,MatRippleModule
+  ,MatInputModule, MatTabsModule} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatCardModule,MatIconModule } from '@angular/material';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav'
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
-import { LogInsuccessComponent } from './log-insuccess/log-insuccess.component';
-import { ShowtransactionsComponent } from './showtransactions/showtransactions.component';
-import { UploadComponent } from './upload/upload.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {CoremModule} from './corem/corem.module';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule} from '@angular/material/button';
-import { MatIconModule} from '@angular/material/icon';
-import { MatButtonToggleModule} from '@angular/material/button-toggle';
-import { MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatTooltipModule} from '@angular/material/tooltip';
+import { UserService } from './users.service';
+import {UploadFileService} from './upload/upload-file.service';
+import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
+import { HomePageComponent } from './home-page/home-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import {AuthGuard} from './auth.guard';
-import { LogoutComponent } from './logout/logout.component';
-
-
+import { AppRoutingModule } from './/app-routing.module';
+import { FormUploadComponent } from './upload/form-upload/form-upload.component';
+import { ListUploadComponent } from './upload/list-upload/list-upload.component';
+import { DetailsUploadComponent } from './upload/details-upload/details-upload.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+import {RecordService} from './records.service';
+import {FilesUploadedService} from '../app/files.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-  
     LoginComponent,
-    RegistrationComponent,
-    LogInsuccessComponent,
-    ShowtransactionsComponent,
-    UploadComponent,
+    HomePageComponent,
     NavbarComponent,
-    HomeComponent,
-    LogoutComponent,
-    
-    
+    DetailsUploadComponent,
+    FormUploadComponent,
+    ListUploadComponent,
+    UploadFileComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
     BrowserAnimationsModule,
+    MatButtonModule, 
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule, MatTabsModule,
+    HttpModule,
+    AppRoutingModule,
+    HttpClientModule,
     MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatButtonToggleModule,
-    CoremModule,
-    MatTooltipModule,
-   
-  
-    
-
-  
+    MatIconModule,MatDialogModule,MatSelectModule,
+    MatSidenavModule,MatMenuModule,MatTableModule,MatProgressSpinnerModule,MatStepperModule,
+    MatTooltipModule
   ],
-  
-  providers: [AuthGuard],
+  providers: [UserService,UploadFileService,RecordService,FilesUploadedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

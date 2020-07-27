@@ -1,116 +1,87 @@
-<!doctype html>
-                        <html>
-                            <head>
-                                <meta charset='utf-8'>
-                                <meta name='viewport' content='width=device-width, initial-scale=1'>
-                                <title>Snippet - BBBootstrap</title>
-                                <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
-                                <link href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' rel='stylesheet'>
-                                <style>
+<br><br><br>
+<div class="example-container" style="text-align:center">
+  <mat-card class="custom">
+      <mat-tab-group>
+          <mat-tab label="Login">
+            <!-- LOGIN -->
 
-.box {
-    width: 500px;
-    padding: 50px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: #191919;
-    
-    text-align: center;
-    transition: 0.25s;
-    margin-top: 100px
-}
-
-.box input[type="text"],
-.box input[type="password"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #3498db;
-    padding: 10px 10px;
-    width: 250px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s
-}
-
-.box h1 {
-    color: white;
-    text-transform: uppercase;
-    font-weight: 500
-}
-
-.box input[type="text"]:focus,
-.box input[type="password"]:focus {
-    width: 300px;
-    border-color: #2ecc71
-}
-
-.box input[type="submit"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #2ecc71;
-    padding: 14px 40px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer
-}
-
-.box input[type="submit"]:hover {
-    background: #2ecc71
-}
-
-
-
-
-
-
-
-</style>
-                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-                                <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
-                                <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
-                                <script type='text/javascript'></script>
-                            </head>
-                            <body >
-                            <div class="container" >
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <form class="box" #loginform="ngForm" (ngSubmit)="logInUser()">
-                  <small class= "text-danger">{{msg}}</small>
-                    <h1>Login</h1>
-                    <p class="text-muted"> Please enter your login and password!</p> 
-                    
-                      
-                      <input type="text" class="form-control" placeholder="Enter email" name="email" [(ngModel)]="user.emailId" required #mail="ngModel" >
-                      <div *ngIf="mail.invalid && mail.touched" class="alert alert-danger">Username is Required Field</div>
-                  
-                     
-                      <input type="password" class="form-control" placeholder="Enter password" name="password" [(ngModel)]="user.password" required #pwd="ngModel">
-                      <div *ngIf="pwd.invalid && pwd.touched" class="alert alert-danger">Password is Required Field</div>
-                  
-                      
-                    <div>
-                      <button [disabled]="loginform.form.invalid" type="submit" class="btn btn-info btn-lg btn-block" id="button" height-bottom="100px" >Login</button>
-               </div>
+            <br><br>
+            <mat-form-field>
+              <input matInput placeholder="Enter your email" [formControl]="emailLogin" required>
               
-                    <a id="reg" (click)="gotoregistrationPage()" ><p>New user? Register Here</p></a>
-                </form>
-               
-            </div>
-        </div>
-    </div>
-    
-</div>
+              <!-- If email is not according to the valid format -->
+              <mat-error *ngIf="emailLogin.invalid">{{getErrorMessage()}}</mat-error>             
+            </mat-form-field>
+          
+          <br><br>
+          
+              <mat-form-field>
+              <input matInput placeholder="Enter your Password" [formControl]="passwordLogin" required type="password">
+              <mat-error *ngIf="passwordLogin.invalid">{{getPasswordErrorMessage()}}</mat-error>
+            </mat-form-field><br><br>
+            <!-- <mat-checkbox>Remember Me</mat-checkbox> -->
+          
+            <!-- <a mat-flat-button routerLink="." style="color: mediumblue">Forgot password?</a> -->
+            
+            <br><br>
+          
+          <!--We can use below syntax for if else-->
+          
+          <div *ngIf="!checkUser(); then ifblock; else elseblock">
+          </div> 
 
-</body>
-</html>
+          <!-- This can be substituted to ng-template-->
+          <!-- <button mat-raised-button color="primary" [disabled]="flag" (click)="checkUser()">Upload</button>
+           -->
+          <ng-template #ifblock>
+
+          <!-- INVALID USER -->
+          <button mat-raised-button color="primary" (click) = "checkUser()" disabled> LOGIN  </button>
+          <mat-error *ngIf="flag"><br>
+             Enter valid email and password to login
+            </mat-error>
+          </ng-template>
+          
+          
+          <ng-template #elseblock>
+              <button mat-raised-button color="primary" (click) = "checkUser()" [routerLink]="['homepage']"> LOGIN </button>
+          </ng-template>
+          </mat-tab>
+            <!-- END OF LOGIN -->
+            
+
+          <mat-tab label="SignUp">
+
+            <br><br>
+            <!-- SIGN UP -->
+              <div class="example-container">
+                  
+                <form #UserForm="ngForm" novalidate>
+                  <mat-form-field>
+                    <input matInput placeholder="Enter your UserName" [formControl]="userNameSignUp" required>
+                    <mat-error *ngIf="userNameSignUp.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput placeholder="Enter your Email" [formControl]="emailSignUp" required>
+                      <mat-error *ngIf="emailSignUp.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                  <mat-form-field>
+                    <input matInput placeholder="Enter your Passsword" [formControl]="passwordSignUp" required type="password">
+                    <mat-error *ngIf="passwordSignUp.invalid">{{getPasswordErrorMessage()}}</mat-error>
+                  </mat-form-field><br><br>
+                  <button mat-raised-button color="primary" (click) = "createUser(UserForm)" > SIGNUP </button>
+                  </form>
+                  
+                </div>
+              
+          </mat-tab>
+          <!-- END OF SIGN UP -->
+          
+      </mat-tab-group>
+        <br><br>
+
+
+  </mat-card>
+  
+</div>
+  
